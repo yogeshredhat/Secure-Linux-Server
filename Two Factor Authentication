@@ -21,6 +21,8 @@ adduser yogesh
 
 Assign Passwd
 
+sudo usermod -aG sudo yogesh
+
 Step 2
 ------
 
