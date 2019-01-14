@@ -1,0 +1,119 @@
+configure openvas on ubuntu 16.04
+---------------------------------
+
+What Is the OpenVAS Vulnerability Scanner?
+
+The OpenVAS scanner is a comprehensive vulnerability assessment system that can detect security issues in all manner of servers and network devices. Use this hosted version of the OpenVAS software to easily test your Internet infrastructure.
+
+Results will be delivered to your email address for analysis; allowing you to start re-mediating any risks your systems face from external threats. 
+
+The Open Vulnerability Assessment System (OpenVAS) is a vulnerability scanner maintained and distributed by Greenbone Networks. It is intended to be an all-in-one vulnerability scanner with a variety of built-in tests and a Web interface designed to make setting up and running vulnerability scans fast and easy while providing a high level of user configurability.
+
+Feeds
+Greenbone is the company that operates OpenVAS and offers the vulnerability scanner as a free or paid version. The main difference is in the feed of Network Vulnerability Tests (NVTs) used by the scanner.
+
+The paid version of the feed is called the Greenbone Security Feed, while the free version of the feed is called the Greenbone Community Feed. Both feeds are updated on a daily basis and include the most recent threats.
+
+The main difference between the two feeds is that the Greenbone Security Feed includes some advanced NVTs specifically targeted for enterprise environments. This difference does not affect the tool’s usability for the casual user but may be important for a pen tester using it for enterprise-level engagements.
+
+Getting Started With OpenVAS
+OpenVAS is a vulnerability scanner designed to run in a Linux environment. It can be installed either as a self-contained virtual machine or from source code provided under GNU General Public License (GPL). In this section, we discuss how to install the OpenVAS scanner and how to run your first scan.
+
+Installation
+OpenVAS is designed to be a self-contained vulnerability scanning framework. It is available either as a virtual machine or as source code that can be compiled and installed on an existing Linux machine. In this section, we discuss how to set up each of these two options.
+
+Virtual Machine
+If you plan to use the OpenVAS virtual machine, you will need a virtual machine player. If you don’t have one already, check out VirtualBox. It’s a free virtual machine player compatible with the OpenVAS virtual machine. Other compatible options are ESXi and Hyper-V.
+
+Once you have a virtual machine player installed, you can download the OpenVAS ISO file from the Greenbone website. To load the virtual machine into VirtualBox, you need to create a new Linux virtual machine (select Other Linux 64-bit for the version).
+
+Configure the VM with the following parameters:
+
+2048 MB of RAM
+A new hard disk with 9 GB of storage
+After creating the machine, right click and go to Settings → System → Processor and select 2 CPUs
+Set the network type to NAT
+After the machine is set up, power it up. When it asks for a startup disk, choose the downloaded OpenVAS file. At the time of writing, it was called gsm-ce-4.2.20.iso. Select the Setup option and follow the prompts to set up your OpenVAS virtual machine.
+
+
+Source Code
+The other installation option for OpenVAS is to compile and install the source code on an existing Linux machine. This process is more complicated and is only recommended for Linux users with experience compiling large projects from scratch. The source code for OpenVAS can be downloaded from repositories listed on the GVM-9 page.
+
+Your First OpenVAS Scan
+Once you have your OpenVAS scanner set up, you can perform your first vulnerability scan. Scans can be configured and run using the OpenVAS web interface. In this section, we’ll walk through setting up a simple scan and some of the available advanced scan options. For both types of scans, it is necessary to browse to Scans → Tasks.
+
+Simple Scan
+The OpenVAS web interface includes a wizard to help set up scans of target machines. To access the wizard, click on the purple button with a picture of a wand in the top left corner of the screen. To start, select the Task Wizard Option.
+
+In order to perform a scan, you need an IP address to scan. For this part of the exercise, you can either provide the IP address of a machine that you own (like the host machine running the VM), set up a virtual machine to test (Metasploitable from Rapid7 is a good choice), or find a machine online deliberately set up for pen testers. Once you have found an IP address to use, enter it into the wizard and select Start Scan.
+
+Once the scan has been started its progress will be shown at the bottom of the page. The remainder of the page includes visualizations that summarize the current progress and results of the configured scans.
+
+While the scan is running, click on its Status bar (in the second column). As the scan runs, any vulnerabilities that it detects will be listed in the report shown. You can click on each reported vulnerability to get details.
+
+Advanced Scan Options
+For users wishing to have a greater level of control over their scans, the OpenVAS web interface also includes an Advanced Task Wizard (also accessed by browsing to Scans->Tasks and clicking the purple button). The advanced wizard offers the following scanning options:
+
+Setting a name for the task
+Choosing a scan config
+Setting the target IP address
+Scheduling future scans
+Using a credentialed scan
+OpenVAS provides several default scan configs and allows users to create custom configs. To see the descriptions of scan configs and create new ones, browse to Configuration → Scan Configs. By default, OpenVAS provides eight scan configs (though one is empty) and the details of each config can be seen by clicking on them. To create a new scan config, click the blue star button in the top left corner, create the config, and then click in to edit it.
+
+OpenVAS’s web interface offers many operations in its Configuration tab. Once you have explored the options and made any necessary modifications, try running an advanced scan using different targets, scan configs, and credentials.
+
+Using OpenVAS for Vulnerability Scanning
+The OpenVAS vulnerability scanner is a free appliance designed to allow users to quickly and easily perform targeted scans of their computer systems. It is free, updated daily, and easy to use, making it an ideal choice for the independent penetration tester or small business sysadmin who needs an inexpensive and intuitive option for identifying potential security holes. For larger enterprises, Greenbone (the organization behind OpenVAS) offers a paid version that includes additional enterprise-focused vulnerability scanning options for a comprehensive vulnerability scanning solution.
+
+
+
+
+su - root
+
+apt-get update -y && apt-get upgrade -y && apt-get dist-upgrade -y && reboot
+
+su - root
+
+apt-get install redis-server nmap sqlite3 nsis rpm alien python-software-properties software-properties-common
+
+add-apt-repository ppa:mrazavi/openvas
+
+apt update
+
+apt-get install openvas9
+
+---> It will take long time be patients-----
+
+greenbone-nvt-sync
+
+greenbone-scapdata-sync
+
+----> It will take some time depends on ur internet speed
+
+greenbone-certdata-sync
+
+/etc/init.d/openvas-scanner restart
+
+/etc/init.d/openvas-scanner status 
+
+/etc/init.d/openvas-manager restart
+
+/etc/init.d/openvas-manager status
+
+openvasmd --rebuild --progress
+
+apt-get install texlive-latex-extra --no-install-recommends -y
+
+apt-get install texlive-fonts-recommended libopenvas9-dev smbclient
+
+
+https://10.191.5.192:4000
+
+u name : admin
+passwd : admin
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
+
