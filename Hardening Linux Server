@@ -38,6 +38,12 @@ ssh yogesh@public-IP
 
 It will login
 
+Login to AWS Server
+-------------------
+userdel -r ubuntu
+
+
+
 
 
 
