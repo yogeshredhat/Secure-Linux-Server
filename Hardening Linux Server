@@ -1,1 +1,50 @@
 
+How to hardening Linux Server ( ubuntu 16.04 )
+----------------------------------------------
+
+Create Amazon ec2 instance 16.04 Server
+---------------------------------------
+
+login to root
+
+apt-get update -y && apt-get upgrade -y
+
+adduser yogesh
+
+set password
+
+usermod -aG sudo yogesh
+
+mkdir /etc/ssh/authorized_keys
+
+vim /etc/ssh/authorized_keys/yogesh
+
+copy /home/ubuntu/.ssh.id_rsa.pub this file will be available in Tarams server so cp this content and paste here
+
+vim /etc/ssh/sshd_config
+
+PermitRootLogin no
+PubkeyAuthentication yes
+PasswordAuthentication no
+AuthorizedKeysFile /etc/ssh/authorized_keys/%u
+Ciphers aes128-ctr,aes192-ctr,aes256-ctr
+
+/etc/init.d/ssh restart
+
+Login to Tarams Server
+----------------------
+
+ssh yogesh@public-IP
+
+It will login
+
+
+
+
+
+
+
+
+
+
+
